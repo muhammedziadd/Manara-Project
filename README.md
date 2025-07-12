@@ -1,10 +1,9 @@
-# Serverless REST API with AWS Lambda, API Gateway, and DynamoDB
+# Serverless REST API with DynamoDP and API Gateway
 
 ## Project Overview
 
 This project implements a fully serverless RESTful API for managing a simple to-do list (or customer records). The API allows users to perform Create, Read, Update, and Delete (CRUD) operations through HTTP endpoints, with all backend logic handled by AWS Lambda and data stored in DynamoDB. The architecture leverages various AWS services to create a scalable, maintainable, and secure solution.
 
----
 
 ## Architecture Overview
 
