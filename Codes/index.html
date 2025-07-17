@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My ToDo List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>My ToDo List</h1>
+
+  <input type="text" id="newTask" placeholder="Enter a new task" />
+  <button id="addTask">Add</button>
+
+  <script>
+    document.getElementById("addTask").addEventListener("click", function () {
+      const task = document.getElementById("newTask").value;
+
+      if (!task.trim()) {
+        alert("Please enter a task!");
+        return;
+      }
+
+      fetch("https://lvucvmjcsg.execute-api.us-west-2.amazonaws.com/prod/todos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ task: task })
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Failed to add task.");
+          }
+          return response.json();
+        })
+        .then(data => {
+          alert("Task added successfully!");
+          document.getElementById("newTask").value = ""; // Clear input
+        })
+        .catch(error => {
+          console.error(error);
+          alert("Failed to add task.");
+        });
+    });
+  </script>
+
+</body>
+</html>
